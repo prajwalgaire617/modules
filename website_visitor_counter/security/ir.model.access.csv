@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_visitor_counter_public,access_visitor_counter_public,model_website_visitor_counter,base.group_public,1,0,1,0
+access_visitor_counter_user,access_visitor_counter_user,model_website_visitor_counter,base.group_user,1,1,1,0
+access_visitor_counter_admin,access_visitor_counter_admin,model_website_visitor_counter,base.group_system,1,1,1,1

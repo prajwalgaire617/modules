@@ -1,0 +1,115 @@
+.s_media_gallery {
+    background: #f8f9fa;
+    min-height: 400px;
+}
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.media-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    min-height: 250px;
+}
+
+.media-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.media-item {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Hide broken images gracefully */
+.media-card img[src=""],
+.media-card img:not([src]) {
+    display: none;
+}
+
+/* Loading animation */
+.media-loading {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Lightbox styles */
+.media-lightbox .modal-content {
+    background: rgba(0,0,0,0.95) !important;
+    border: none;
+}
+
+.media-lightbox .modal-header {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 1rem 1.5rem;
+}
+
+.media-lightbox .modal-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.media-lightbox .close {
+    color: white;
+    opacity: 0.8;
+    text-shadow: none;
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.media-lightbox .close:hover {
+    opacity: 1;
+    color: white;
+}
+
+.media-lightbox .modal-body img {
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .media-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+    
+    .media-item {
+        height: 180px;
+    }
+    
+    .media-card {
+        min-height: 180px;
+    }
+}
+
+/* Counter styles */
+.media-counter {
+    animation: fadeIn 0.5s ease;
+}
+
+.media-counter p {
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* Empty state */
+.media-empty {
+    animation: fadeIn 0.3s ease;
+}

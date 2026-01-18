@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record id="view_visitor_counter_tree" model="ir.ui.view">
+            <field name="name">website.visitor.counter.tree</field>
+            <field name="model">website.visitor.counter</field>
+            <field name="arch" type="xml">
+                <tree string="Visitor Counter">
+                    <field name="session_id"/>
+                    <field name="ip_address"/>
+                    <field name="visit_datetime"/>
+                    <field name="page_url"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_visitor_counter_form" model="ir.ui.view">
+            <field name="name">website.visitor.counter.form</field>
+            <field name="model">website.visitor.counter</field>
+            <field name="arch" type="xml">
+                <form string="Visitor Counter">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="session_id"/>
+                                <field name="ip_address"/>
+                                <field name="visit_datetime"/>
+                            </group>
+                            <group>
+                                <field name="page_url"/>
+                                <field name="user_agent"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_visitor_counter_search" model="ir.ui.view">
+            <field name="name">website.visitor.counter.search</field>
+            <field name="model">website.visitor.counter</field>
+            <field name="arch" type="xml">
+                <search string="Search Visitors">
+                    <field name="session_id"/>
+                    <field name="ip_address"/>
+                    <filter string="Today" name="today" 
+                            domain="[('visit_datetime', '&gt;=', datetime.datetime.now().replace(hour=0, minute=0, second=0))]"/>
+                    <filter string="This Week" name="this_week" 
+                            domain="[('visit_datetime', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="IP Address" name="group_ip" context="{'group_by': 'ip_address'}"/>
+                        <filter string="Visit Date" name="group_date" context="{'group_by': 'visit_datetime:day'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_visitor_counter" model="ir.actions.act_window">
+            <field name="name">Visitor Counter</field>
+            <field name="res_model">website.visitor.counter</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No visitors tracked yet
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="menu_visitor_counter_root"
+                  name="Visitor Counter"
+                  parent="website.menu_website_configuration"
+                  sequence="100"/>
+
+        <menuitem id="menu_visitor_counter"
+                  name="All Visitors"
+                  parent="menu_visitor_counter_root"
+                  action="action_visitor_counter"
+                  sequence="10"/>
+    </data>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- SAFE APPROACH: Add iframe and hide image with CSS -->
+    <template id="product_iframe_css_hide" inherit_id="website_sale.product" name="Product Iframe CSS">
+        <!-- Insert at the very beginning of the template -->
+        <xpath expr="//div[@id='wrap']" position="inside">
+            <t t-if="product.use_iframe and product.iframe_url">
+                <style>
+                    /* Hide all product image containers when iframe is active */
+                    #product_detail .carousel,
+                    #product_detail .o_carousel_product_images,
+                    #product_detail img[itemprop="image"] {
+                        display: none !important;
+                    }
+                </style>
+            </t>
+        </xpath>
+    </template>
+    
+    <!-- Add the iframe itself -->
+    <template id="product_iframe_display" inherit_id="website_sale.product" name="Product Iframe Display">
+        <!-- Add after the main heading -->
+        <xpath expr="//h1[@itemprop='name']" position="after">
+            <t t-if="product.use_iframe and product.iframe_url">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="product-iframe-wrapper" style="position: relative; width: 100%; max-width: 800px; margin: 0 auto;">
+                            <iframe 
+                                t-att-src="product.iframe_url" 
+                                t-att-height="product.iframe_height or 500"
+                                style="width: 100%; border: 1px solid #ddd; border-radius: 4px; display: block;"
+                                frameborder="0"
+                                allowfullscreen="allowfullscreen"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+    
+</odoo>

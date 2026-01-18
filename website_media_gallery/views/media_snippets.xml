@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Snippet Option Registration -->
+    <template id="snippet_media_gallery_option" inherit_id="website.snippets">
+        <xpath expr="//div[@id='snippet_structure']/div[@class='o_panel_body']" position="inside">
+            <t t-snippet="website_media_gallery.snippet_media_gallery"/>
+        </xpath>
+    </template>
+
+    <!-- Snippet Template - Shows ALL images -->
+    <template id="snippet_media_gallery" name="Media Gallery">
+        <section class="s_media_gallery pt-5 pb-5" style="background: #f8f9fa;">
+            <div class="container">
+                <h2 class="text-center mb-4">Media Gallery</h2>
+                <!-- Remove limit to show ALL images -->
+                <t t-set="attachments" t-value="request.env['ir.attachment'].sudo().search([('type', '=', 'binary'), ('mimetype', 'ilike', 'image/')], order='create_date desc')"/>
+                
+                <t t-if="not attachments">
+                    <div class="text-center py-5">
+                        <i class="fa fa-image fa-4x text-muted mb-3" style="opacity: 0.3;"></i>
+                        <h4 class="text-muted">No Media Found</h4>
+                        <p class="text-muted">Upload some images to display them here</p>
+                    </div>
+                </t>
+                
+                <t t-if="attachments">
+                    <div class="media-grid">
+                        <t t-foreach="attachments" t-as="att">
+                            <div class="media-card">
+<img t-att-src="'/web/image/%s' % att.id" 
+     t-att-alt="att.name or 'Image'"
+     t-att-data-name="att.name"
+     loading="lazy"
+     class="media-item"/>
+                            </div>
+                        </t>
+                    </div>
+                    <div class="text-center mt-4">
+                        <p class="text-muted">Total: <t t-esc="len(attachments)"/> images</p>
+                    </div>
+                </t>
+            </div>
+        </section>
+    </template>
+</odoo>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Add visitor counter to website header with inline CSS and JS -->
+        <template id="visitor_counter_badge" name="Visitor Counter Badge" inherit_id="website.layout">
+            <xpath expr="//header[@id='top']" position="inside">
+                <style>
+                    .visitor_counter_wrapper {
+                        position: absolute;
+                        top: 10px;
+                        right: 60px;
+                        z-index: 1000;
+                        display: inline-block;
+                    }
+                    
+                    .visitor_counter_badge {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 8px 12px;
+                        background: rgba(135, 90, 123, 0.1);
+                        border-radius: 20px;
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                    }
+                    
+                    .visitor_counter_badge:hover {
+                        background: rgba(135, 90, 123, 0.2);
+                        transform: scale(1.05);
+                    }
+                    
+                    .visitor_counter_badge .fa-eye {
+                        animation: blink 3s infinite;
+                    }
+                    
+                    @keyframes blink {
+                        0%, 100% { opacity: 1; }
+                        50% { opacity: 0.5; }
+                    }
+                    
+                    #visitor_count_badge {
+                        animation: pulse 2s infinite;
+                    }
+                    
+                    @keyframes pulse {
+                        0%, 100% { transform: scale(1); }
+                        50% { transform: scale(1.1); }
+                    }
+                </style>
+                
+                <div class="visitor_counter_wrapper">
+                    <div class="visitor_counter_badge position-relative" title="Unique Visitors">
+                        <i class="fa fa-eye" style="font-size: 20px; color: #875a7b;"></i>
+                        <span class="badge badge-pill badge-danger position-absolute" 
+                              id="visitor_count_badge" 
+                              style="top: -8px; right: -12px; font-size: 10px; min-width: 20px;">
+                            0
+                        </span>
+                    </div>
+                </div>
+                
+                <script type="text/javascript">
+                    (function() {
+                        'use strict';
+                        
+                        function updateVisitorCount() {
+                            fetch('/website/visitor/register', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    jsonrpc: '2.0',
+                                    method: 'call',
+                                    params: {},
+                                    id: Math.floor(Math.random() * 1000000)
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.result &amp;&amp; data.result.success) {
+                                    var badge = document.getElementById('visitor_count_badge');
+                                    if (badge) {
+                                        badge.textContent = data.result.count;
+                                    }
+                                }
+                            })
+                            .catch(error => console.error('Error:', error));
+                        }
+                        
+                        // Update on page load
+                        if (document.readyState === 'loading') {
+                            document.addEventListener('DOMContentLoaded', updateVisitorCount);
+                        } else {
+                            updateVisitorCount();
+                        }
+                        
+                        // Update every 30 seconds
+                        setInterval(updateVisitorCount, 30000);
+                    })();
+                </script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

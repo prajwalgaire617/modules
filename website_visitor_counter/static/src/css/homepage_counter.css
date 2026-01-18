@@ -1,0 +1,11 @@
+.homepage-counter {
+    background: #f7f7f7;
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    h1 {
+        font-size: 4rem;
+        color: #ff6600;
+    }
+}
