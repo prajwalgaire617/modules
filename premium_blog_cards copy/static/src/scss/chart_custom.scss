@@ -1,0 +1,116 @@
+/* Custom Video Background Snippet */
+.s_custom_video_carousel.o_custom_video_bg {
+    min-height: 75vh;
+    background-color: #000;
+
+    .o_video_layer {
+        pointer-events: none;
+        overflow: hidden;
+
+        iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            transform: translate(-50%, -50%) scale(1.5); /* Prevents black bars */
+            @media (min-aspect-ratio: 16/9) {
+                height: 56.25vw;
+            }
+            @media (max-aspect-ratio: 16/9) {
+                width: 177.78vh;
+            }
+        }
+    }
+
+    .o_custom_audio_toggle {
+        transition: all 0.3s ease;
+        &:hover {
+            transform: scale(1.1);
+        }
+        &.active {
+            background-color: #28a745 !important;
+            border-color: #28a745 !important;
+        }
+    }
+}
+
+/* Chart Card Scroller (Carousel Style) */
+.s_chart_card_scroller.o_chart_card_scroller {
+    background-color: #f7fafc;
+
+    .o_scroller_container {
+        /* Centered nav arrows */
+        .o_scroller_nav {
+            background: white !important;
+            border: 1px solid #e2e8f0 !important;
+            color: #4a5568 !important;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            &:hover {
+                background: #edf2f7 !important;
+                color: #2d3748 !important;
+                transform: translateY(-50%) scale(1.1) !important;
+            }
+        }
+    }
+
+    .o_scroller_wrapper {
+        display: block !important;
+        white-space: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth; /* Essential for JS arrows */
+        padding: 20px 0 50px 0;
+        
+        /* Hide scrollbar but keep functionality */
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        .o_scroller_inner {
+            display: inline-block !important;
+            vertical-align: top;
+            width: auto;
+            padding-left: 20px; /* Give some space at the start */
+        }
+
+        /* Target children dropped into the oe_structure */
+        .o_scroller_inner > * {
+            display: inline-block !important;
+            vertical-align: top !important;
+            white-space: normal !important;
+            width: 450px !important;
+            margin-right: 30px;
+            scroll-snap-align: center;
+            
+            @media (max-width: 768px) {
+                width: 320px !important;
+            }
+        }
+    }
+}
+
+/* Make Chart Snippets look like Premium cards inside the scroller */
+.s_chart_card_scroller .s_chart,
+.s_chart_card_scroller .o_graph_renderer {
+    background: #fff !important;
+    border-radius: 20px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.06) !important;
+    padding: 30px !important;
+    min-height: 520px !important;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}

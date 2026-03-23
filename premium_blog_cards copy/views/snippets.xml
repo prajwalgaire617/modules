@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- Premium Blog Card Template for Dynamic Snippet -->
+<template id="dynamic_filter_template_blog_post_premium" name="Premium layout">
+    <div t-foreach="records" t-as="data" class="s_blog_posts_post pb32 w-100">
+        <t t-set="record" t-value="data['_record']"/>
+        <article class="o_wblog_post card h-100 border-0 shadow-sm overflow-hidden">
+            <!-- Cover Image with Author Overlay -->
+            <a class="s_blog_posts_post_cover position-relative d-block text-decoration-none" t-att-href="data['call_to_action_url']">
+                <t t-call="website.record_cover">
+                    <t t-set="_record" t-value="record"/>
+                    <t t-set="_resize_height" t-value="400"/>
+                    <t t-set="_resize_width" t-value="600"/>
+                    <t t-set="use_filters" t-value="True"/>
+                    <t t-set="additionnal_classes" t-value="'h-100'"/>
+                </t>
+                <!-- Author Overlay (matches DHN Style) -->
+                <div class="o_wblog_post_author_overlay position-absolute bottom-0 left-0 w-100 p-2 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);">
+                    <small class="font-weight-bold" t-field="record.author_id.name"/>
+                </div>
+            </a>
+
+            <!-- Card Body -->
+            <div class="card-body p-3">
+                <div t-if="is_sample" class="h5 o_ribbon_right bg-primary text-uppercase">Sample</div>
+                
+                <!-- Title -->
+                <a t-att-href="data['call_to_action_url']" class="text-reset text-decoration-none">
+                    <h5 class="card-title font-weight-bold mb-2" t-field="record.name"/>
+                </a>
+
+                <!-- Teaser/Content (matches DHN Style) -->
+                <p class="card-text text-muted small o_wblog_post_teaser mb-3">
+                    <t t-if="record.teaser" t-esc="record.teaser"/>
+                    <t t-elif="record.subtitle" t-esc="record.subtitle"/>
+                </p>
+
+                <!-- Blog Tag -->
+                <div class="mb-3">
+                    <span class="badge badge-light border text-info px-2 py-1" t-field="record.blog_id.name"/>
+                </div>
+            </div>
+
+            <!-- Card Footer (Stats) -->
+            <div class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center px-3 pb-3">
+                <small class="text-muted font-weight-bold" t-field="record.post_date" t-options='{"format": "MMM d, yyyy"}'/>
+                <div class="d-flex align-items-center text-muted">
+                    <span class="small mr-3">
+                        <i class="fa fa-comment mr-1"/>
+                        <t t-if="record.website_message_ids" t-esc="len(record.website_message_ids)"/>
+                        <t t-else="">0</t>
+                    </span>
+                    <span class="small">
+                        <i class="fa fa-binoculars mr-1"/>
+                        <t t-esc="record.visits or 0"/>
+                    </span>
+                </div>
+            </div>
+        </article>
+    </div>
+</template>
+
+</odoo>

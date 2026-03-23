@@ -1,0 +1,46 @@
+/* Premium Blog Cards SCSS */
+.s_dynamic_snippet_blog_posts {
+    .o_wblog_post {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+            
+            .o_blog_post_title {
+                color: #00A09D !important; /* Standard Odoo primary teal */
+            }
+        }
+        
+        .s_blog_posts_post_cover {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            background-color: #f8f9fa; /* Fallback color */
+        }
+        
+        .o_wblog_post_author_overlay {
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .o_wblog_post_teaser {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.5;
+            min-height: 4.5em; /* Approximately 3 lines */
+        }
+        
+        .card-footer {
+            .fa {
+                opacity: 0.7;
+            }
+            b {
+                font-weight: 600;
+            }
+        }
+    }
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- Custom Video Carousel Snippet Template -->
+<template id="s_custom_video_carousel" name="Premium Video Carousel">
+    <section class="s_custom_video_carousel s_carousel s_carousel_default carousel slide" data-interval="5000" id="myCarouselVideos">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarouselVideos" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarouselVideos" data-slide-to="1"></li>
+        </ol>
+
+        <div class="carousel-inner">
+            <!-- Slide 1: Video Background -->
+            <div class="carousel-item active o_video_slide" data-video="true" data-video-id="dQw4w9WgXc">
+                <div class="o_video_container position-absolute w-100 h-100" style="z-index: -1;">
+                    <iframe class="yt-player w-100 h-100 border-0 pointer-events-none" 
+                            src="https://www.youtube.com/embed/dQw4w9WgXc?enablejsapi=1&amp;controls=0&amp;rel=0&amp;loop=1&amp;playlist=dQw4w9WgXc&amp;autoplay=1&amp;mute=1" 
+                            allow="autoplay; encrypted-media; accelerometer; gyroscope; picture-in-picture" 
+                            allowfullscreen="true"></iframe>
+                </div>
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-lg-6 text-white p-4" style="background: rgba(0,0,0,0.4); border-radius: 15px;">
+                            <h2 class="display-4 font-weight-bold">Premium Video Slides</h2>
+                            <p class="lead">Experience high-quality YouTube backgrounds with auto-play and audio control.</p>
+                            <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Unmute Button Overlay -->
+                <button class="yt-unmute-btn btn btn-dark shadow-lg">
+                    <i class="fa fa-volume-off"></i> <span>Click to Enable Audio</span>
+                </button>
+                
+                <!-- Audio Instruction -->
+                <div class="text-white text-center mt-2" style="background: rgba(0,0,0,0.6); border-radius: 10px; padding: 8px; font-size: 12px;">
+                    <i class="fa fa-info-circle"></i> Click video or button to enable audio
+                </div>
+            </div>
+
+            <!-- Slide 2: Standard Image Slide -->
+            <div class="carousel-item oe_img_bg o_bg_img_center" style="background-image: url('/web/static/src/img/placeholder.png');">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-lg-12 text-center text-white">
+                            <h2 class="display-3">Seamless Mix</h2>
+                            <p class="lead">Combine videos and images in the same carousel for maximum impact.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="carousel-control-prev" href="#myCarouselVideos" data-slide="prev" role="button">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarouselVideos" data-slide="next" role="button">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </section>
+</template>
+
+<!-- Snippet Registration -->
+<template id="s_custom_video_carousel_registration" inherit_id="website.snippets" name="Custom Video Carousel Registration">
+    <xpath expr="//div[@id='snippet_content']//div[contains(@class, 'o_panel_body')]" position="inside">
+        <t t-snippet="website_custom_video_carousel.s_custom_video_carousel" t-thumbnail="/website/static/src/img/snippets_thumbs/s_carousel.svg"/>
+    </xpath>
+</template>
+
+</odoo>
