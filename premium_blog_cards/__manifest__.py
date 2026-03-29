@@ -14,7 +14,7 @@ Features:
 * Views and Comments stats with icons
 * Modern, responsive grid design
 """,
-    'author': 'Custom Developer',
+    'author': 'Prajwal Gaire',
     'depends': ['website_blog', 'website'],
     'data': [
         'views/snippets.xml',
