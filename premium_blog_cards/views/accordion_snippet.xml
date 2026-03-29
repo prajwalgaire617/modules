@@ -7,7 +7,7 @@
         <div class="container">
             <h2 class="text-center mb-5">Explore Our List of Blogs</h2>
             <div id="blogAccordion" class="accordion">
-                <t t-set="blogs" t-value="request.env['blog.blog'].search([])"/>
+                <t t-set="blogs" t-value="request.env['blog.blog'].search([('website_id', 'in', [request.env['website'].get_current_website().id, False])])"/>
                 <t t-foreach="blogs" t-as="blog">
                     <div class="card border-0 mb-2 shadow-sm">
                         <div class="card-header bg-white p-0" t-attf-id="heading#{blog.id}">
@@ -30,17 +30,16 @@
                              data-parent="#blogAccordion">
                             <div class="card-body p-0">
                                 <ul class="list-group list-group-flush">
-                                    <t t-set="posts" t-value="request.env['blog.post'].search([('blog_id', '=', blog.id), ('website_published', '=', True)])"/>
+                                    <t t-set="posts" t-value="request.env['blog.post'].search([('blog_id', '=', blog.id), ('website_published', '=', True), ('website_id', 'in', [request.env['website'].get_current_website().id, False])])"/>
                                     <t t-if="not posts">
                                         <li class="list-group-item text-muted small">No posts available in this category.</li>
                                     </t>
                                     <t t-foreach="posts" t-as="post">
                                         <li class="list-group-item py-2 px-4 border-0">
-                                            <a t-att-href="post.website_url" class="text-info text-decoration-none">
+                                            <a t-att-href="post.website_url" class="text-info text-decoration-none d-flex align-items-center">
                                                 <i class="fa fa-caret-right mr-2"/>
                                                 <span t-field="post.name"/>
                                             </a>
-                                            <small class="text-muted d-block ml-3" t-field="post.post_date"/>
                                         </li>
                                     </t>
                                 </ul>
@@ -51,6 +50,22 @@
             </div>
         </div>
     </section>
+</template>
+
+<!-- Snippet Options -->
+<template id="s_blog_accordion_options" inherit_id="website.snippet_options">
+    <xpath expr="." position="inside">
+        <div data-js="s_blog_accordion" data-selector=".s_blog_accordion">
+            <we-select string="Layout" data-no-preview="true">
+                <we-button data-select-class="" data-name="list_layout">List</we-button>
+                <we-button data-select-class="s_blog_accordion_grid_2" data-name="grid_2_layout">Grid (2 cols)</we-button>
+                <we-button data-select-class="s_blog_accordion_grid_3" data-name="grid_3_layout">Grid (3 cols)</we-button>
+                <we-button data-select-class="s_blog_accordion_grid_4" data-name="grid_4_layout">Grid (4 cols)</we-button>
+                <we-button data-select-class="s_blog_accordion_grid_5" data-name="grid_5_layout">Grid (5 cols)</we-button>
+                <we-button data-select-class="s_blog_accordion_grid_6" data-name="grid_6_layout">Grid (6 cols)</we-button>
+            </we-select>
+        </div>
+    </xpath>
 </template>
 
 <!-- Register the snippet -->

@@ -15,8 +15,9 @@
                     <t t-set="use_filters" t-value="True"/>
                     <t t-set="additionnal_classes" t-value="'h-100'"/>
                 </t>
-                <!-- Author Overlay (matches DHN Style) -->
-                <div class="o_wblog_post_author_overlay position-absolute bottom-0 left-0 w-100 p-2 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);">
+                <!-- Author Overlay -->
+                <div class="o_wblog_post_author_overlay position-absolute bottom-0 left-0 w-100 p-2 text-white d-flex align-items-center" style="background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);">
+                    <img t-if="record.author_id.image_128" t-attf-src="/web/image/res.partner/#{record.author_id.id}/image_128" class="rounded-circle mr-2" style="width: 24px; height: 24px; object-fit: cover; border: 1px solid rgba(255,255,255,0.5);"/>
                     <small class="font-weight-bold" t-field="record.author_id.name"/>
                 </div>
             </a>
@@ -30,22 +31,20 @@
                     <h5 class="card-title font-weight-bold mb-2" t-field="record.name"/>
                 </a>
 
-                <!-- Teaser/Content (matches DHN Style) -->
+                <!-- Teaser/Content -->
                 <p class="card-text text-muted small o_wblog_post_teaser mb-3">
                     <t t-if="record.teaser" t-esc="record.teaser"/>
                     <t t-elif="record.subtitle" t-esc="record.subtitle"/>
                 </p>
-
-                <!-- Blog Tag -->
-                <div class="mb-3">
-                    <span class="badge badge-light border text-info px-2 py-1" t-field="record.blog_id.name"/>
-                </div>
             </div>
 
-            <!-- Card Footer (Stats) -->
-            <div class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center px-3 pb-3">
-                <small class="text-muted font-weight-bold" t-field="record.post_date" t-options='{"format": "MMM d, yyyy"}'/>
-                <div class="d-flex align-items-center text-muted">
+            <!-- Card Footer (Stats & Tag) -->
+            <div class="card-footer bg-white border-top d-flex justify-content-between align-items-center px-3 py-2">
+                <div class="flex-grow-1 text-left">
+                    <small class="text-muted font-weight-bold" t-field="record.post_date" t-options='{"format": "MMM d, yyyy"}'/>
+                </div>
+                
+                <div class="d-flex align-items-center text-muted mx-auto">
                     <span class="small mr-3">
                         <i class="fa fa-comment mr-1"/>
                         <t t-if="record.website_message_ids" t-esc="len(record.website_message_ids)"/>
@@ -54,6 +53,13 @@
                     <span class="small">
                         <i class="fa fa-binoculars mr-1"/>
                         <t t-esc="record.visits or 0"/>
+                    </span>
+                </div>
+
+                <div class="flex-grow-1 text-right">
+                    <span class="small text-success font-weight-bold">
+                        <i class="fa fa-folder-open mr-1"/>
+                        <span t-field="record.blog_id.name"/>
                     </span>
                 </div>
             </div>

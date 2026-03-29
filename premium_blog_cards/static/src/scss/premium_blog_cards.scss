@@ -44,3 +44,41 @@
         }
     }
 }
+
+/* Accordion Grid Support */
+.s_blog_accordion {
+    &.s_blog_accordion_grid_2, 
+    &.s_blog_accordion_grid_3, 
+    &.s_blog_accordion_grid_4, 
+    &.s_blog_accordion_grid_5, 
+    &.s_blog_accordion_grid_6 {
+        .list-group {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+        }
+    }
+
+    @media (min-width: 768px) {
+        &.s_blog_accordion_grid_2 .list-group-item {
+            flex: 0 0 50% !important;
+            max-width: 50% !important;
+        }
+        &.s_blog_accordion_grid_3 .list-group-item {
+            flex: 0 0 33.33% !important;
+            max-width: 33.33% !important;
+        }
+        &.s_blog_accordion_grid_4 .list-group-item {
+            flex: 0 0 25% !important;
+            max-width: 25% !important;
+        }
+        &.s_blog_accordion_grid_5 .list-group-item {
+            flex: 0 0 20% !important;
+            max-width: 20% !important;
+        }
+        &.s_blog_accordion_grid_6 .list-group-item {
+            flex: 0 0 16.66% !important;
+            max-width: 16.66% !important;
+        }
+    }
+}
