@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Premium Blog Cards (Dynamic Snippet)',
+    'name': 'Premium Blog Cards and Accordion (Dynamic Snippets)',
     'version': '15.0.1.0.0',
     'category': 'Website',
     'summary': 'Adds a premium card template to the standard Odoo blog dynamic snippet',
@@ -24,8 +24,7 @@ Features:
         'web.assets_frontend': [
             'premium_blog_cards/static/src/scss/premium_blog_cards.scss',
             'premium_blog_cards/static/src/scss/chart_custom.scss',
-            'premium_blog_cards/static/src/js/stability_patches.js',
-            'premium_blog_cards/static/src/js/custom_carousels.js',
+            'premium_blog_cards/static/src/js/blog_accordion.js',
         ],
     },
     'installable': True,
