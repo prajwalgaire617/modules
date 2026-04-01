@@ -24,7 +24,6 @@ Features:
         'web.assets_frontend': [
             'premium_blog_cards/static/src/scss/premium_blog_cards.scss',
             'premium_blog_cards/static/src/scss/chart_custom.scss',
-            'premium_blog_cards/static/src/js/blog_accordion.js',
         ],
     },
     'installable': True,
