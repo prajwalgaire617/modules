@@ -21,6 +21,11 @@ odoo.define('premium_blog_cards.blog_accordion', function (require) {
                 params: {},
             }).then(function (data) {
                 self._renderAccordion(data);
+            }).catch(function (error) {
+                var $accordion = self.$('#blogAccordion').length ? self.$('#blogAccordion') : self.$('.accordion');
+                if ($accordion.length) {
+                    $accordion.html('<div class="alert alert-danger m-3">Error loading blogs. Please try again later.</div>');
+                }
             });
         },
 
@@ -29,7 +34,11 @@ odoo.define('premium_blog_cards.blog_accordion', function (require) {
             if (!$accordion.length) {
                 $accordion = this.$('.accordion');
             }
-            if (!$accordion.length || !blogs || !blogs.length) {
+            if (!$accordion.length) {
+                return;
+            }
+            if (!blogs || !blogs.length) {
+                $accordion.html('<div class="text-center text-muted p-4 border rounded bg-light">No blogs available yet.</div>');
                 return;
             }
 
